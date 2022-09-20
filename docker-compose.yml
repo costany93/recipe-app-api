@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  app:
+    # nous voulons lancer notre container docker sur le repertoire actuelle
+    build:
+      context: .
+      args:
+        - DEV=true
+    #lier le port 8000 de notre machine au port 8000 de docker
+    ports:
+      - "8000:8000"
+    #lier le dossier app de notre mqchine qu dossier app de notre docker
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
